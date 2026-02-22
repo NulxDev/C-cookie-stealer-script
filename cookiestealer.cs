@@ -20,7 +20,7 @@ class Program
         // wait to it load
         System.Threading.Thread.Sleep(5000);
 
-        // getting the cookie
+        // getting the cookie and ip adresses ( at your risk )
         var cookies = driver.Manage().Cookies.AllCookies;
         string robloSecurityCookie = null;
         string ipAddress = GetPublicIpAddress();
