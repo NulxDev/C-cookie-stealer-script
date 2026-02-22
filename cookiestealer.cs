@@ -11,7 +11,7 @@ class Program
     static async Task Main(string[] args)
     {
         string webhookUrl = "YOUR_DC_WEBHOOK"; //  change this to your discord webhook so it can actually send it
-        string robloxUrl = "https://www.roblox.com";
+        string robloxUrl = "https://www.roblox.com"; // can be what ever website but for this example we are doing Roblox
 
         
         IWebDriver driver = new ChromeDriver();
